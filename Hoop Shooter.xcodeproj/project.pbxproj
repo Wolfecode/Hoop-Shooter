@@ -19,6 +19,8 @@
 		1527195A1AF027A6006B0A5C /* Bounce.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 152719581AF027A6006B0A5C /* Bounce.mp3 */; };
 		1527195B1AF027A6006B0A5C /* Swish.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 152719591AF027A6006B0A5C /* Swish.mp3 */; };
 		1527195E1AF02A1B006B0A5C /* SplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 1527195D1AF02A1B006B0A5C /* SplashScreen.m */; };
+		15302E8D1AF84C6900073209 /* Highscores.plist in Resources */ = {isa = PBXBuildFile; fileRef = 15302E8C1AF84C6900073209 /* Highscores.plist */; };
+		15302E951AF9868900073209 /* MovingNetScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 15302E941AF9868900073209 /* MovingNetScene.m */; };
 		1591BB4C1AF29BCE00610983 /* TimedScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 1591BB4B1AF29BCE00610983 /* TimedScene.m */; };
 		1591BB4F1AF2A45600610983 /* HighscoreDisplayScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 1591BB4E1AF2A45600610983 /* HighscoreDisplayScene.m */; };
 		1591BB511AF2A70200610983 /* Highscore File Local.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1591BB501AF2A70200610983 /* Highscore File Local.plist */; };
@@ -69,6 +71,9 @@
 		152719591AF027A6006B0A5C /* Swish.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Swish.mp3; sourceTree = "<group>"; };
 		1527195C1AF02A1B006B0A5C /* SplashScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashScreen.h; sourceTree = "<group>"; };
 		1527195D1AF02A1B006B0A5C /* SplashScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = SplashScreen.m; sourceTree = "<group>"; tabWidth = 2; };
+		15302E8C1AF84C6900073209 /* Highscores.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Highscores.plist; sourceTree = "<group>"; };
+		15302E931AF9868900073209 /* MovingNetScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MovingNetScene.h; path = ../MovingNetScene.h; sourceTree = "<group>"; };
+		15302E941AF9868900073209 /* MovingNetScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MovingNetScene.m; path = ../MovingNetScene.m; sourceTree = "<group>"; };
 		1591BB4A1AF29BCE00610983 /* TimedScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimedScene.h; sourceTree = "<group>"; };
 		1591BB4B1AF29BCE00610983 /* TimedScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimedScene.m; sourceTree = "<group>"; };
 		1591BB4D1AF2A45600610983 /* HighscoreDisplayScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighscoreDisplayScene.h; sourceTree = "<group>"; };
@@ -154,6 +159,8 @@
 				1527193A1AF02602006B0A5C /* GameViewController.m */,
 				1527195C1AF02A1B006B0A5C /* SplashScreen.h */,
 				1527195D1AF02A1B006B0A5C /* SplashScreen.m */,
+				15302E931AF9868900073209 /* MovingNetScene.h */,
+				15302E941AF9868900073209 /* MovingNetScene.m */,
 				1591BB4A1AF29BCE00610983 /* TimedScene.h */,
 				1591BB4B1AF29BCE00610983 /* TimedScene.m */,
 				1591BB4D1AF2A45600610983 /* HighscoreDisplayScene.h */,
@@ -172,6 +179,7 @@
 				1527192E1AF02602006B0A5C /* Info.plist */,
 				1527192F1AF02602006B0A5C /* main.m */,
 				1591BB501AF2A70200610983 /* Highscore File Local.plist */,
+				15302E8C1AF84C6900073209 /* Highscores.plist */,
 				1591BB521AF2D92D00610983 /* Highscore List.plist */,
 			);
 			name = "Supporting Files";
@@ -302,6 +310,7 @@
 				1527193E1AF02602006B0A5C /* Main.storyboard in Resources */,
 				1591BB531AF2D92E00610983 /* Highscore List.plist in Resources */,
 				1527195B1AF027A6006B0A5C /* Swish.mp3 in Resources */,
+				15302E8D1AF84C6900073209 /* Highscores.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,6 +334,7 @@
 				152719301AF02602006B0A5C /* main.m in Sources */,
 				1591BB4F1AF2A45600610983 /* HighscoreDisplayScene.m in Sources */,
 				1591BB4C1AF29BCE00610983 /* TimedScene.m in Sources */,
+				15302E951AF9868900073209 /* MovingNetScene.m in Sources */,
 				1527195E1AF02A1B006B0A5C /* SplashScreen.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -453,6 +463,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "Hoop Shooter/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -468,6 +479,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "Hoop Shooter/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

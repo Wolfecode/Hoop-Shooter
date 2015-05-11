@@ -43,7 +43,7 @@
     skView.ignoresSiblingOrder = YES;
     
     // Create and configure the scene.
-    GameScene *scene = [GameScene unarchiveFromFile:@"GameScene"];
+    SplashScreen *scene = [SplashScreen unarchiveFromFile:@"GameScene"];
     scene.scaleMode = SKSceneScaleModeResizeFill;
     
     // Present the scene.

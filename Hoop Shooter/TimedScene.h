@@ -9,6 +9,12 @@
 #import "GameScene.h"
 #import <Parse/Parse.h>
 
-@interface TimedScene : GameScene
+@interface TimedScene : GameScene <UIAlertViewDelegate>
+
+@property NSTimer *timer;
+@property int timerDuration;
+@property SKLabelNode *timerLabel;
+@property SKLabelNode *highscores;
+@property SKShapeNode *highscoresBox;
 
 @end

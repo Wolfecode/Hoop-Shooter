@@ -17,6 +17,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [Parse enableLocalDatastore];
     [Parse setApplicationId:@"kBnZofj0REmUYh6VKdcbVlg7HwfvZrBvsLYaBLv4" clientKey:@"DaA6fmlcJjOkByhfDMOvjeG7BxErp1cJmZPN9aA6"];
     
     return YES;
