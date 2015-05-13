@@ -55,7 +55,6 @@
         }
         
         [self saveToParse:name];
-//        [self saveLocally:name];
     }
     else {
         SplashScreen *splashScreen = [SplashScreen sceneWithSize:self.size];
@@ -133,6 +132,14 @@
             NSLog(@"%@",error);
         }
     }];
+}
+
+-(void)setDefaultValues {
+    self.gravity = 9.8;
+    self.restitution = 0.7;
+    self.velocityCoefficient = 5;
+    self.doesHover = YES;
+    self.hasRoof = NO;
 }
 
 @end

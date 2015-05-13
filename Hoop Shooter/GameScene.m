@@ -8,6 +8,7 @@
 
 #import "GameScene.h"
 #import "SplashScreen.h"
+#import "FreeplaySettingsScene.h"
 
 @implementation GameScene {
     float w;
@@ -15,6 +16,7 @@
     BOOL atBottom;
     BOOL shotWillCount;
     BOOL hasClearedHoopArea;
+    NSUserDefaults *userDefualts;
 }
 
 static const uint32_t ballCategory = 1;
@@ -31,14 +33,22 @@ static const uint32_t addPoints = 32;
     _isGamePaused = NO;
     _bounceSound = [SKAction playSoundFileNamed:@"Bounce.mp3" waitForCompletion:NO];
     _swishSound = [SKAction playSoundFileNamed:@"Swish.mp3" waitForCompletion:NO];
+    [self setDefaultValues];
     
     self.backgroundColor = [SKColor lightGrayColor];
     
+    int roofHeight;
+    if(_hasRoof){
+        roofHeight = h;
+    }
+    else {
+        roofHeight = 20000;
+    }
     CGPoint points[] = {
-        CGPointMake(0, 20000),
+        CGPointMake(0, roofHeight),
         CGPointMake(0, 0),
         CGPointMake(w, 0),
-        CGPointMake(w, 20000),
+        CGPointMake(w, roofHeight),
     };
     
     CGMutablePathRef boundary = CGPathCreateMutable();
@@ -104,14 +114,14 @@ static const uint32_t addPoints = 32;
 
 - (void)addBall {
     _ball = [SKSpriteNode spriteNodeWithImageNamed:@"Ball"];
-    _ball.position = CGPointMake(_ball.size.width, _ball.size.height*3/2);
+    _ball.position = CGPointMake(50, 50);
     _ball.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:_ball.frame.size.width/2];
     _ball.physicsBody.categoryBitMask = ballCategory;
     _ball.physicsBody.contactTestBitMask = checkScoreCategory | edgeBodyCategory | rimCategory | hoopEdgeCategory;
     _ball.physicsBody.collisionBitMask = rimCategory | hoopEdgeCategory | edgeBodyCategory;
     _ball.physicsBody.usesPreciseCollisionDetection = YES;
     _ball.physicsBody.linearDamping = 0;
-    _ball.physicsBody.restitution = 0.7;
+    _ball.physicsBody.restitution = _restitution;
     
     [self addChild:_ball];
 }
@@ -125,21 +135,22 @@ static const uint32_t addPoints = 32;
     
     for(UITouch *touch in touches){
         _firstTouchPoint = [touch locationInNode:self];
-        
-        _ball.physicsBody.velocity = CGVectorMake(0, 0);
-        self.physicsWorld.gravity = CGVectorMake(0, 0);
+        if(_doesHover){
+            _ball.physicsBody.velocity = CGVectorMake(0, 0);
+            self.physicsWorld.gravity = CGVectorMake(0, 0);
+        }
     }
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
     for(UITouch *touch in touches){
         CGPoint endPoint = [touch locationInNode:self];
-        float vectX = 5*(endPoint.x - self.firstTouchPoint.x);
-        float vectY = 5*(endPoint.y - self.firstTouchPoint.y);
+        float vectX = self.velocityCoefficient*(endPoint.x - self.firstTouchPoint.x);
+        float vectY = self.velocityCoefficient*(endPoint.y - self.firstTouchPoint.y);
         
         CGVector ballVect = CGVectorMake(vectX, vectY);
         _ball.physicsBody.velocity = ballVect;
-        self.physicsWorld.gravity = CGVectorMake(0, -9.8);
+        self.physicsWorld.gravity = CGVectorMake(0, -self.gravity);
         
         if(_isGamePaused == NO){
             _shotCount ++;
@@ -147,13 +158,19 @@ static const uint32_t addPoints = 32;
     }
     UITouch *touch = [touches anyObject];
     SKNode *node = [self nodeAtPoint:[touch locationInNode:self]];
-    if(_isGamePaused && [node.name isEqualToString:@"Home Button"]){
-        SplashScreen *splashScreen = [SplashScreen sceneWithSize:self.size];
-        [self.view presentScene:splashScreen transition:[SKTransition pushWithDirection:SKTransitionDirectionRight duration:1]];
+    if(_isGamePaused ){
+        if([node.name isEqualToString:@"Home Button"]){
+            SplashScreen *splashScreen = [SplashScreen sceneWithSize:self.size];
+            [self.view presentScene:splashScreen transition:[SKTransition pushWithDirection:SKTransitionDirectionRight duration:1]];
+        }
+        if([node.name isEqualToString:@"Settings"]) {
+            
+        }
+        if([node.name isEqualToString:@"Resume Game"]){
+            [self unpauseGame];
+        }
     }
-    if(_isGamePaused && [node.name isEqualToString:@"Resume Game"]){
-        [self unpauseGame];
-    }
+    
     
 }
 
@@ -183,29 +200,12 @@ static const uint32_t addPoints = 32;
     _isGamePaused = YES; //Set pause flag to true
     self.paused = YES; //Pause scene and physics simulation
     //Display pause screen etc.
-    _home = [SKLabelNode labelNodeWithText:@"HOME"];
-    _home.fontName = @"Myriad Pro";
-    _home.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
-    _home.fontSize = 36;
-    _home.position = CGPointMake(w/2, h/2 + 50);
-    _home.fontColor = [SKColor whiteColor];
-    _home.zPosition = 10;
-    [self addChild:_home];
-    
-    _homeBox = [SKShapeNode shapeNodeWithRectOfSize:CGSizeMake(w*3/4, _home.fontSize + 30) cornerRadius:0];
-    _homeBox.name = @"Home Button";
-    _homeBox.position = _home.position;
-    _homeBox.fillColor = [SKColor clearColor];
-    _homeBox.lineWidth = 5;
-    _homeBox.strokeColor = [SKColor whiteColor];
-    _homeBox.zPosition = 10;
-    [self addChild:_homeBox];
     
     _resume = [SKLabelNode labelNodeWithText:@"RESUME"];
     _resume.fontName = @"Myriad Pro";
     _resume.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
     _resume.fontSize = 36;
-    _resume.position = CGPointMake(w/2, h/2 - 50);
+    _resume.position = CGPointMake(w/2, h/2 + 100);
     _resume.fontColor = [SKColor whiteColor];
     _resume.zPosition = 10;
     [self addChild:_resume];
@@ -219,18 +219,64 @@ static const uint32_t addPoints = 32;
     _resumeBox.zPosition = 10;
     [self addChild:_resumeBox];
     
+    _settings = [SKLabelNode labelNodeWithText:@"SETTINGS"];
+    _settings.fontName = @"Myriad Pro";
+    _settings.fontSize = 36;
+    _settings.position = CGPointMake(w/2, h/2);
+    _settings.fontColor = [SKColor whiteColor];
+    _settings.zPosition = 10;
+    [self addChild:_settings];
+    
+    _settingsBox = [SKShapeNode shapeNodeWithRectOfSize:CGSizeMake(w*3/4, _settings.fontSize + 30) cornerRadius:0];
+    _settingsBox.name = @"Settings";
+    _settingsBox.position = _settings.position;
+    _settingsBox.fillColor = [SKColor clearColor];
+    _settingsBox.lineWidth = 5;
+    _settingsBox.strokeColor = [SKColor whiteColor];
+    _settingsBox.zPosition = 10;
+    [self addChild:_settingsBox];
+    
+    _home = [SKLabelNode labelNodeWithText:@"HOME"];
+    _home.fontName = @"Myriad Pro";
+    _home.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+    _home.fontSize = 36;
+    _home.position = CGPointMake(w/2, h/2 - 100);
+    _home.fontColor = [SKColor whiteColor];
+    _home.zPosition = 10;
+    [self addChild:_home];
+    
+    _homeBox = [SKShapeNode shapeNodeWithRectOfSize:CGSizeMake(w*3/4, _home.fontSize + 30) cornerRadius:0];
+    _homeBox.name = @"Home Button";
+    _homeBox.position = _home.position;
+    _homeBox.fillColor = [SKColor clearColor];
+    _homeBox.lineWidth = 5;
+    _homeBox.strokeColor = [SKColor whiteColor];
+    _homeBox.zPosition = 10;
+    [self addChild:_homeBox];
+    
 }
 
 -(void)unpauseGame {
-    [_home removeFromParent];
-    [_homeBox removeFromParent];
     [_resume removeFromParent];
     [_resumeBox removeFromParent];
+    [_settings removeFromParent];
+    [_settingsBox removeFromParent];
+    [_home removeFromParent];
+    [_homeBox removeFromParent];
     
     _isGamePaused = NO; //Set pause flag to false
     self.paused = NO; //Resume scene and physics simulation
     
     _ball.physicsBody.velocity = _savedVector;
+}
+
+-(void)setDefaultValues {
+    userDefualts = [NSUserDefaults standardUserDefaults];
+    _gravity = [userDefualts floatForKey:@"Gravity"];
+    _restitution = [userDefualts floatForKey:@"Restitution"];
+    _velocityCoefficient = [userDefualts floatForKey:@"Velocity Coefficient"];
+    _doesHover = [userDefualts boolForKey:@"Hover?"];
+    _hasRoof = [userDefualts boolForKey:@"Roof?"];
 }
 
 -(void)update:(CFTimeInterval)currentTime {

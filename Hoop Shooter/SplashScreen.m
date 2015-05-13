@@ -10,6 +10,7 @@
 #import "GameScene.h"
 #import "TimedScene.h"
 #import "MovingNetScene.h"
+#import "FreeplaySettingsScene.h"
 
 @implementation SplashScreen {
     float w;
@@ -29,12 +30,12 @@
     titleLabel.fontColor = [SKColor whiteColor];
     [self addChild:titleLabel];
     
-    SKSpriteNode *ballImage = [SKSpriteNode spriteNodeWithImageNamed:@"Ball"];
+    SKSpriteNode *ballImage = [SKSpriteNode spriteNodeWithImageNamed:@"Basketball"];
     ballImage.position = CGPointMake(w/2, h - 160);
     ballImage.size = CGSizeMake(60, 60);
     [self addChild:ballImage];
     
-    SKLabelNode *freeplay = [SKLabelNode labelNodeWithText:@"Freeplay Mode"];
+    SKLabelNode *freeplay = [SKLabelNode labelNodeWithText:@"FREEPLAY"];
     freeplay.fontName = @"Myriad Pro";
     freeplay.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
     freeplay.fontSize = 36;
@@ -43,14 +44,30 @@
     [self addChild:freeplay];
     
     SKShapeNode *freeplayBox = [SKShapeNode shapeNodeWithRectOfSize:CGSizeMake(w*3/4, freeplay.fontSize + 30) cornerRadius:0];
-    freeplayBox.name = @"Freeplay Mode";
+    freeplayBox.name = @"Freeplay";
     freeplayBox.position = freeplay.position;
     freeplayBox.fillColor = [SKColor clearColor];
     freeplayBox.lineWidth = 5;
     freeplayBox.strokeColor = [SKColor whiteColor];
     [self addChild:freeplayBox];
     
-    SKLabelNode *timedGame = [SKLabelNode labelNodeWithText:@"Timed Game"];
+    SKLabelNode *settings = [SKLabelNode labelNodeWithText:@"SETTINGS"];
+    settings.fontName = @"Myriad Pro";
+    settings.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+    settings.fontSize = 36;
+    settings.position = CGPointMake(w/2, h/2 + 100);
+    settings.fontColor = [SKColor whiteColor];
+    [self addChild:settings];
+    
+    SKShapeNode *settingsBox = [SKShapeNode shapeNodeWithRectOfSize:CGSizeMake(w*3/4, settings.fontSize + 30) cornerRadius:0];
+    settingsBox.name = @"Settings";
+    settingsBox.position = settings.position;
+    settingsBox.fillColor = [SKColor clearColor];
+    settingsBox.lineWidth = 5;
+    settingsBox.strokeColor = [SKColor whiteColor];
+    [self addChild:settingsBox];
+    
+    SKLabelNode *timedGame = [SKLabelNode labelNodeWithText:@"TIMED"];
     timedGame.fontName = @"Myriad Pro";
     timedGame.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
     timedGame.fontSize = 36;
@@ -59,14 +76,14 @@
     [self addChild:timedGame];
     
     SKShapeNode *timedGameBox = [SKShapeNode shapeNodeWithRectOfSize:CGSizeMake(w*3/4, timedGame.fontSize + 30) cornerRadius:0];
-    timedGameBox.name = @"Timed Game";
+    timedGameBox.name = @"Timed";
     timedGameBox.position = timedGame.position;
     timedGameBox.fillColor = [SKColor clearColor];
     timedGameBox.lineWidth = 5;
     timedGameBox.strokeColor = [SKColor whiteColor];
     [self addChild:timedGameBox];
 
-    SKLabelNode *movingBasket = [SKLabelNode labelNodeWithText:@"Moving Basket"];
+    SKLabelNode *movingBasket = [SKLabelNode labelNodeWithText:@"MOVING HOOP"];
     movingBasket.fontName = @"Myriad Pro";
     movingBasket.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
     movingBasket.fontSize = 36;
@@ -75,7 +92,7 @@
     [self addChild:movingBasket];
     
     SKShapeNode *movingBasketBox = [SKShapeNode shapeNodeWithRectOfSize:CGSizeMake(w*3/4, movingBasket.fontSize + 30) cornerRadius:0];
-    movingBasketBox.name = @"Moving Net";
+    movingBasketBox.name = @"Moving Hoop";
     movingBasketBox.position = movingBasket.position;
     movingBasketBox.fillColor = [SKColor clearColor];
     movingBasketBox.lineWidth = 5;
@@ -102,17 +119,21 @@
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInNode:self];
     SKNode *node = [self nodeAtPoint:point];
-    if([node.name isEqualToString:@"Freeplay Mode"]){
+    if([node.name isEqualToString:@"Freeplay"]){
         GameScene *gameScene = [GameScene sceneWithSize:self.size];
         [self.view presentScene:gameScene transition:[SKTransition doorsOpenHorizontalWithDuration:1]];
     }
-    if([node.name isEqualToString:@"Timed Game"]){
+    if([node.name isEqualToString:@"Timed"]){
         TimedScene *timedScene = [TimedScene sceneWithSize:self.size];
         [self.view presentScene:timedScene transition:[SKTransition doorsOpenHorizontalWithDuration:1]];
     }
-    if([node.name isEqualToString:@"Moving Net"]){
+    if([node.name isEqualToString:@"Moving Hoop"]){
         MovingNetScene *movingNetScene = [MovingNetScene sceneWithSize:self.size];
         [self.view presentScene:movingNetScene transition:[SKTransition doorsOpenHorizontalWithDuration:1]];
+    }
+    if ([node.name isEqualToString:@"Settings"]) {
+        FreeplaySettingsScene *settingsScene = [FreeplaySettingsScene sceneWithSize:self.size];
+        [self.view presentScene:settingsScene];
     }
 }
 @end

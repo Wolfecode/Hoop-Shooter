@@ -19,12 +19,10 @@
 		1527195A1AF027A6006B0A5C /* Bounce.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 152719581AF027A6006B0A5C /* Bounce.mp3 */; };
 		1527195B1AF027A6006B0A5C /* Swish.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 152719591AF027A6006B0A5C /* Swish.mp3 */; };
 		1527195E1AF02A1B006B0A5C /* SplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 1527195D1AF02A1B006B0A5C /* SplashScreen.m */; };
-		15302E8D1AF84C6900073209 /* Highscores.plist in Resources */ = {isa = PBXBuildFile; fileRef = 15302E8C1AF84C6900073209 /* Highscores.plist */; };
 		15302E951AF9868900073209 /* MovingNetScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 15302E941AF9868900073209 /* MovingNetScene.m */; };
+		1559A7E31B02AFFE00595AE2 /* FreeplaySettingsScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 1559A7E21B02AFFE00595AE2 /* FreeplaySettingsScene.m */; };
 		1591BB4C1AF29BCE00610983 /* TimedScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 1591BB4B1AF29BCE00610983 /* TimedScene.m */; };
 		1591BB4F1AF2A45600610983 /* HighscoreDisplayScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 1591BB4E1AF2A45600610983 /* HighscoreDisplayScene.m */; };
-		1591BB511AF2A70200610983 /* Highscore File Local.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1591BB501AF2A70200610983 /* Highscore File Local.plist */; };
-		1591BB531AF2D92E00610983 /* Highscore List.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1591BB521AF2D92D00610983 /* Highscore List.plist */; };
 		1591BB551AF2DDA900610983 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1591BB541AF2DDA900610983 /* AudioToolbox.framework */; };
 		1591BB571AF2DDAE00610983 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1591BB561AF2DDAE00610983 /* CFNetwork.framework */; };
 		1591BB591AF2DDB300610983 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1591BB581AF2DDB300610983 /* QuartzCore.framework */; };
@@ -71,15 +69,14 @@
 		152719591AF027A6006B0A5C /* Swish.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Swish.mp3; sourceTree = "<group>"; };
 		1527195C1AF02A1B006B0A5C /* SplashScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashScreen.h; sourceTree = "<group>"; };
 		1527195D1AF02A1B006B0A5C /* SplashScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = SplashScreen.m; sourceTree = "<group>"; tabWidth = 2; };
-		15302E8C1AF84C6900073209 /* Highscores.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Highscores.plist; sourceTree = "<group>"; };
 		15302E931AF9868900073209 /* MovingNetScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MovingNetScene.h; path = ../MovingNetScene.h; sourceTree = "<group>"; };
 		15302E941AF9868900073209 /* MovingNetScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MovingNetScene.m; path = ../MovingNetScene.m; sourceTree = "<group>"; };
+		1559A7E11B02AFFE00595AE2 /* FreeplaySettingsScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreeplaySettingsScene.h; sourceTree = "<group>"; };
+		1559A7E21B02AFFE00595AE2 /* FreeplaySettingsScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreeplaySettingsScene.m; sourceTree = "<group>"; };
 		1591BB4A1AF29BCE00610983 /* TimedScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimedScene.h; sourceTree = "<group>"; };
 		1591BB4B1AF29BCE00610983 /* TimedScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimedScene.m; sourceTree = "<group>"; };
 		1591BB4D1AF2A45600610983 /* HighscoreDisplayScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighscoreDisplayScene.h; sourceTree = "<group>"; };
 		1591BB4E1AF2A45600610983 /* HighscoreDisplayScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighscoreDisplayScene.m; sourceTree = "<group>"; };
-		1591BB501AF2A70200610983 /* Highscore File Local.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Highscore File Local.plist"; sourceTree = "<group>"; };
-		1591BB521AF2D92D00610983 /* Highscore List.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Highscore List.plist"; sourceTree = "<group>"; };
 		1591BB541AF2DDA900610983 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		1591BB561AF2DDAE00610983 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		1591BB581AF2DDB300610983 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -154,6 +151,8 @@
 				152719321AF02602006B0A5C /* AppDelegate.m */,
 				152719341AF02602006B0A5C /* GameScene.h */,
 				152719351AF02602006B0A5C /* GameScene.m */,
+				1559A7E11B02AFFE00595AE2 /* FreeplaySettingsScene.h */,
+				1559A7E21B02AFFE00595AE2 /* FreeplaySettingsScene.m */,
 				152719371AF02602006B0A5C /* GameScene.sks */,
 				152719391AF02602006B0A5C /* GameViewController.h */,
 				1527193A1AF02602006B0A5C /* GameViewController.m */,
@@ -178,9 +177,6 @@
 			children = (
 				1527192E1AF02602006B0A5C /* Info.plist */,
 				1527192F1AF02602006B0A5C /* main.m */,
-				1591BB501AF2A70200610983 /* Highscore File Local.plist */,
-				15302E8C1AF84C6900073209 /* Highscores.plist */,
-				1591BB521AF2D92D00610983 /* Highscore List.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -304,13 +300,10 @@
 			files = (
 				152719431AF02602006B0A5C /* LaunchScreen.xib in Resources */,
 				152719401AF02602006B0A5C /* Images.xcassets in Resources */,
-				1591BB511AF2A70200610983 /* Highscore File Local.plist in Resources */,
 				152719381AF02602006B0A5C /* GameScene.sks in Resources */,
 				1527195A1AF027A6006B0A5C /* Bounce.mp3 in Resources */,
 				1527193E1AF02602006B0A5C /* Main.storyboard in Resources */,
-				1591BB531AF2D92E00610983 /* Highscore List.plist in Resources */,
 				1527195B1AF027A6006B0A5C /* Swish.mp3 in Resources */,
-				15302E8D1AF84C6900073209 /* Highscores.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,6 +323,7 @@
 			files = (
 				1527193B1AF02602006B0A5C /* GameViewController.m in Sources */,
 				152719331AF02602006B0A5C /* AppDelegate.m in Sources */,
+				1559A7E31B02AFFE00595AE2 /* FreeplaySettingsScene.m in Sources */,
 				152719361AF02602006B0A5C /* GameScene.m in Sources */,
 				152719301AF02602006B0A5C /* main.m in Sources */,
 				1591BB4F1AF2A45600610983 /* HighscoreDisplayScene.m in Sources */,

@@ -20,6 +20,14 @@
     [Parse enableLocalDatastore];
     [Parse setApplicationId:@"kBnZofj0REmUYh6VKdcbVlg7HwfvZrBvsLYaBLv4" clientKey:@"DaA6fmlcJjOkByhfDMOvjeG7BxErp1cJmZPN9aA6"];
     
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setFloat:9.81 forKey:@"Gravity"];
+    [userDefaults setFloat:0.70 forKey:@"Restitution"];
+    [userDefaults setFloat:5.0 forKey:@"Velocity Coefficient"];
+    [userDefaults setBool:YES forKey:@"Hover?"];
+    [userDefaults setBool:NO forKey:@"Roof?"];
+    [userDefaults setObject:@"Ball" forKey:@"Ball Image"];
+    
     return YES;
 }
 

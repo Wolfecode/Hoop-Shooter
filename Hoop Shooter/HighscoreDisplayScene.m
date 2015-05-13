@@ -12,18 +12,22 @@
 @implementation HighscoreDisplayScene {
     float w;
     float h;
+    float xScale;
+    float yScale;
 }
 
 -(void)didMoveToView:(SKView *)view {
     w = self.view.frame.size.width;
     h = self.view.frame.size.height;
+    xScale = w/375;
+    yScale = h/667;
     self.backgroundColor = [SKColor lightGrayColor];
     
     SKLabelNode *mainLabel = [SKLabelNode labelNodeWithText:@"HIGHSCORES"];
     mainLabel.fontName = @"Myriad Pro";
-    mainLabel.fontSize = 32;
+    mainLabel.fontSize = 32*xScale;
     mainLabel.fontColor = [SKColor blackColor];
-    mainLabel.position = CGPointMake(w/2, h-50);
+    mainLabel.position = CGPointMake(w/2, h - 50*yScale);
     [self addChild:mainLabel];
     
     float textWidth = mainLabel.frame.size.width;
@@ -35,7 +39,7 @@
         nameLabel.fontSize = 20;
         nameLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
         nameLabel.fontColor = [SKColor orangeColor];
-        nameLabel.position = CGPointMake(w/2 - textWidth/2, h - 100 - (i*50));
+        nameLabel.position = CGPointMake(w/2 - textWidth/2, h - (i+2)*50*yScale);
         [self addChild:nameLabel];
         
         SKLabelNode *highScoreLabel = [SKLabelNode labelNodeWithText:[NSString stringWithFormat:@"%@",object[@"userScore"]]];
@@ -43,7 +47,7 @@
         highScoreLabel.fontSize = 20;
         highScoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeRight;
         highScoreLabel.fontColor = [SKColor redColor];
-        highScoreLabel.position = CGPointMake(w/2 + textWidth/2, h - 100 - (i*50));
+        highScoreLabel.position = CGPointMake(w/2 + textWidth/2, h - (i+2)*50*yScale);
         [self addChild:highScoreLabel];
         i++;
     }
@@ -52,7 +56,7 @@
     home.fontName = @"Myriad Pro";
     home.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
     home.fontSize = 36;
-    home.position = CGPointMake(w/2, 50);
+    home.position = CGPointMake(w/2, 50*yScale);
     home.fontColor = [SKColor whiteColor];
     home.zPosition = 10;
     [self addChild:home];
@@ -69,9 +73,7 @@
 
 -(NSArray *)getParseList {
     PFQuery *query = [PFQuery queryWithClassName:@"UserName"];
-    if([query countObjects] == 0){
-        query.cachePolicy = kPFCachePolicyCacheThenNetwork;
-    }
+    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     [query orderByDescending:@"userScore"];
     query.limit = 10;
     

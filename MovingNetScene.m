@@ -45,4 +45,8 @@
     }
 }
 
+-(void)setDefaultValues {
+    [super setDefaultValues];
+}
+
 @end
