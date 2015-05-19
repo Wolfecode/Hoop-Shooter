@@ -24,9 +24,20 @@
     xScale = w/375;
     yScale = h/667;
     
+    self.backgroundColor = [SKColor blueColor];
+    
     userDefaults = [NSUserDefaults standardUserDefaults];
     UIImage *image = [self imageWithImage:[UIImage imageNamed:@"Basketball"] scaledToSize:CGSizeMake(20, 20)];
 
+    SKLabelNode *titleLabel = [SKLabelNode labelNodeWithText:@"SETTINGS"];
+    titleLabel.fontName = @"Myriad Pro";
+    titleLabel.fontSize = 48;
+    titleLabel.position = CGPointMake(w/2, h - 50);
+    titleLabel.fontColor = [SKColor whiteColor];
+    titleLabel.xScale = xScale;
+    titleLabel.yScale = yScale;
+    [self addChild:titleLabel];
+    
     _gravityLabel = [SKLabelNode labelNodeWithText:[NSString stringWithFormat:@"Gravity: %.2f",[userDefaults floatForKey:@"Gravity"]]];
     _gravityLabel.fontName = @"Myriad Pro";
     _gravityLabel.fontSize = 24;
@@ -36,7 +47,7 @@
     _gravityLabel.position = CGPointMake(w/24, h - 100*yScale);
     [self addChild:_gravityLabel];
     
-    _gravitySlider = [[UISlider alloc] initWithFrame:CGRectMake(w*7/12, 88*yScale, w*4/12, 24)];
+    _gravitySlider = [[UISlider alloc] initWithFrame:CGRectMake(w*7/12, 88*yScale, w*5/12, 24)];
     [_gravitySlider addTarget:self action:@selector(gravitySliderAction:) forControlEvents:UIControlEventValueChanged];
     [_gravitySlider setContinuous:YES];
     [_gravitySlider setMinimumValue:0];
@@ -55,7 +66,7 @@
     _restitutionLabel.position = CGPointMake(w/24, h - 188*yScale);
     [self addChild:_restitutionLabel];
     
-    _restitutionSlider = [[UISlider alloc] initWithFrame:CGRectMake(w*7/12, 2*88*yScale, w*4/12, 24)];
+    _restitutionSlider = [[UISlider alloc] initWithFrame:CGRectMake(w*7/12, 2*88*yScale, w*5/12, 24)];
     [_restitutionSlider addTarget:self action:@selector(restitutionSliderAction:) forControlEvents:UIControlEventValueChanged];
     [_restitutionSlider setContinuous:YES];
     [_restitutionSlider setMinimumValue:0];
@@ -74,7 +85,7 @@
     _velocityCoefficientLabel.position = CGPointMake(w/24, h - 274*yScale);
     [self addChild:_velocityCoefficientLabel];
     
-    _velocityCoefficientSlider = [[UISlider alloc] initWithFrame:CGRectMake(w*7/12, 3*87*yScale, w*4/12, 24)];
+    _velocityCoefficientSlider = [[UISlider alloc] initWithFrame:CGRectMake(w*7/12, 3*87*yScale, w*5/12, 24)];
     [_velocityCoefficientSlider addTarget:self action:@selector(velocityCoefficientAction:) forControlEvents:UIControlEventValueChanged];
     [_velocityCoefficientSlider setContinuous:YES];
     [_velocityCoefficientSlider setMinimumValue:1];
@@ -98,7 +109,7 @@
     _roofSwitchLabel.position = CGPointMake(w/24, h - 362*yScale);
     [self addChild:_roofSwitchLabel];
     
-    _roofSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(w*10/12, 4*87*yScale, 100, 50)];
+    _roofSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(w*10/12, 4*87*yScale, 100*xScale, 50)];
     [_roofSwitch addTarget:self action:@selector(roofSwitchAction:) forControlEvents:UIControlEventValueChanged];
     _roofSwitch.on = NO;
     _roofSwitch.onTintColor = [UIColor orangeColor];
@@ -146,6 +157,7 @@
     freeplay.fontSize = 24;
     freeplay.position = CGPointMake(w*3/4, 50);
     freeplay.fontColor = [SKColor whiteColor];
+    freeplay.xScale = xScale;
     [self addChild:freeplay];
     
     SKShapeNode *freeplayBox = [SKShapeNode shapeNodeWithRectOfSize:CGSizeMake(w/2 - 20, freeplay.fontSize + 30) cornerRadius:0];

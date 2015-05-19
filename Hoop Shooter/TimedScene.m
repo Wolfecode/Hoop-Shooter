@@ -13,12 +13,14 @@
 @implementation TimedScene {
     float w;
     float h;
+    NSUserDefaults *userDefault;
 }
 
 -(void)didMoveToView:(SKView *)view {
     [super didMoveToView:view];
     w = self.view.frame.size.width;
     h = self.view.frame.size.height;
+    userDefault = [NSUserDefaults standardUserDefaults];
     
     _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(countDown) userInfo:nil repeats:YES];
     _timerDuration = 1;
@@ -109,11 +111,6 @@
 }
 
 -(void)saveToParse:(NSString *)name {
-    PFObject *globalScore = [PFObject objectWithClassName:@"GlobalScores"];
-    [globalScore setObject:name forKey:@"userName"];
-    [globalScore setObject:@"userId" forKey:@"userId"];
-    [globalScore setObject:[NSNumber numberWithInt:self.score] forKey:@"userScore"];
-    [globalScore saveEventually];
     
     PFObject *score = [PFObject objectWithClassName:@"UserName"];
     [score setObject:name forKey:@"userName"];

@@ -35,7 +35,7 @@ static const uint32_t addPoints = 32;
     _swishSound = [SKAction playSoundFileNamed:@"Swish.mp3" waitForCompletion:NO];
     [self setDefaultValues];
     
-    self.backgroundColor = [SKColor lightGrayColor];
+    self.backgroundColor = [SKColor colorWithRed:.7 green:.7 blue:1 alpha:1];
     
     int roofHeight;
     if(_hasRoof){
@@ -77,6 +77,7 @@ static const uint32_t addPoints = 32;
 }
 
 -(void)addPauseButton {
+
     _pauseButton = [SKSpriteNode spriteNodeWithImageNamed:@"Pause Icon"];
     _pauseButton.name = @"pause";
     [_pauseButton setSize:CGSizeMake(25, 25)];
@@ -96,24 +97,25 @@ static const uint32_t addPoints = 32;
     _hoopEdge = [SKNode node];
     _hoopEdge.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(w-7, self.hoop.position.y+self.hoop.size.height/2) toPoint:CGPointMake(w, self.hoop.position.y+self.hoop.size.height/2)];
     
-    _checkShot = [SKNode node];
-    _checkShot.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(w-self.hoop.size.width, self.hoop.position.y + self.hoop.size.height/2) toPoint:CGPointMake(w-7, self.hoop.position.y + self.hoop.size.height/2)];
-    _checkShot.physicsBody.categoryBitMask = checkScoreCategory;
-    _checkShot.physicsBody.contactTestBitMask = ballCategory;
+//    _checkShot = [SKNode node];
+//    _checkShot.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(w-self.hoop.size.width, self.hoop.position.y + self.hoop.size.height/2) toPoint:CGPointMake(w-7, self.hoop.position.y + self.hoop.size.height/2)];
+//    _checkShot.physicsBody.categoryBitMask = checkScoreCategory;
+//    _checkShot.physicsBody.contactTestBitMask = ballCategory;
     
     _addPoints = [SKNode node];
-    _addPoints.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(w-self.hoop.size.width, self.hoop.position.y - self.hoop.size.height/2) toPoint:CGPointMake(w-7, self.hoop.position.y - self.hoop.size.height/2)];
+    _addPoints.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(w-self.hoop.size.width, self.hoop.position.y +   self.hoop.size.height/2) toPoint:CGPointMake(w-7, self.hoop.position.y + self.hoop.size.height/2)];
     _addPoints.physicsBody.categoryBitMask = addPoints;
-    _checkShot.physicsBody.contactTestBitMask = ballCategory;
+    _addPoints.physicsBody.contactTestBitMask = ballCategory;
     
-    [self addChild:_checkShot];
+//    [self addChild:_checkShot];
     [self addChild:_addPoints];
     [self addChild:_hoopEdge];
     [self addChild:_hoop];
 }
 
 - (void)addBall {
-    _ball = [SKSpriteNode spriteNodeWithImageNamed:@"Ball"];
+    _ball = [SKSpriteNode spriteNodeWithImageNamed:[userDefualts objectForKey:@"Ball Image"]];
+    _ball.size = CGSizeMake(58, 58);
     _ball.position = CGPointMake(50, 50);
     _ball.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:_ball.frame.size.width/2];
     _ball.physicsBody.categoryBitMask = ballCategory;
@@ -122,7 +124,7 @@ static const uint32_t addPoints = 32;
     _ball.physicsBody.usesPreciseCollisionDetection = YES;
     _ball.physicsBody.linearDamping = 0;
     _ball.physicsBody.restitution = _restitution;
-    
+        
     [self addChild:_ball];
 }
 
@@ -158,33 +160,32 @@ static const uint32_t addPoints = 32;
     }
     UITouch *touch = [touches anyObject];
     SKNode *node = [self nodeAtPoint:[touch locationInNode:self]];
-    if(_isGamePaused ){
+    if(_isGamePaused){
         if([node.name isEqualToString:@"Home Button"]){
             SplashScreen *splashScreen = [SplashScreen sceneWithSize:self.size];
             [self.view presentScene:splashScreen transition:[SKTransition pushWithDirection:SKTransitionDirectionRight duration:1]];
         }
         if([node.name isEqualToString:@"Settings"]) {
-            
+            FreeplaySettingsScene *settings = [FreeplaySettingsScene sceneWithSize:self.size];
+            [self.view presentScene:settings transition:[SKTransition pushWithDirection:SKTransitionDirectionLeft duration:1]];
         }
         if([node.name isEqualToString:@"Resume Game"]){
             [self unpauseGame];
         }
     }
-    
-    
 }
 
 -(void)didBeginContact:(SKPhysicsContact *)contact {
-    if (contact.bodyA.categoryBitMask == checkScoreCategory) {
+    if (contact.bodyA.categoryBitMask == addPoints) {
         if(hasClearedHoopArea && _ball.physicsBody.velocity.dy < 0) {
-            shotWillCount = YES;
+//            shotWillCount = YES;
             _score ++;
             [self runAction:_swishSound];
 
-//            hasClearedHoopArea = NO;
+            hasClearedHoopArea = NO;
         }
     }
-//    if((contact.bodyA.categoryBitMask == addPoints || contact.bodyB.categoryBitMask == addPoints)) {
+//    if(contact.bodyA.categoryBitMask == addPoints) {
 //        _score ++;
 //        [self runAction:_swishSound];
 //        shotWillCount = NO;
@@ -222,6 +223,7 @@ static const uint32_t addPoints = 32;
     _settings = [SKLabelNode labelNodeWithText:@"SETTINGS"];
     _settings.fontName = @"Myriad Pro";
     _settings.fontSize = 36;
+    _settings.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
     _settings.position = CGPointMake(w/2, h/2);
     _settings.fontColor = [SKColor whiteColor];
     _settings.zPosition = 10;
@@ -281,8 +283,8 @@ static const uint32_t addPoints = 32;
 
 -(void)update:(CFTimeInterval)currentTime {
     /* Called before each frame is rendered */
-    _scoreLabel.text = [NSString stringWithFormat:@"%i", _score];
-    _shotLabel.text = [NSString stringWithFormat:@"%i", _shotCount];
+    _scoreLabel.text = [NSString stringWithFormat:@"Score: %i", _score];
+    _shotLabel.text = [NSString stringWithFormat:@"Shots: %i", _shotCount];
     if(_ball.position.y < 31 && _ball.position.y > 30){
         if(atBottom == YES){
         _ball.position = CGPointMake(_ball.position.x, 30);

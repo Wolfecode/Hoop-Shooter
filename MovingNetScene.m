@@ -38,11 +38,15 @@
     
     if(!self.isGamePaused){
         hoopY += speed * yDirection;
-        self.hoop.position = CGPointMake(self.hoop.position.x, hoopY);
         
+        self.hoop.position = CGPointMake(self.hoop.position.x, hoopY);
         self.hoopEdge.position = CGPointMake(self.hoopEdge.position.x, hoopY - h/3);
         self.addPoints.position = CGPointMake(self.addPoints.position.x, hoopY - h/3);
     }
+}
+
+-(void)didBeginContact:(SKPhysicsContact *)contact {
+    [super didBeginContact:contact];
 }
 
 -(void)setDefaultValues {

@@ -21,6 +21,8 @@
 		1527195E1AF02A1B006B0A5C /* SplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 1527195D1AF02A1B006B0A5C /* SplashScreen.m */; };
 		15302E951AF9868900073209 /* MovingNetScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 15302E941AF9868900073209 /* MovingNetScene.m */; };
 		1559A7E31B02AFFE00595AE2 /* FreeplaySettingsScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 1559A7E21B02AFFE00595AE2 /* FreeplaySettingsScene.m */; };
+		157190351B0A5F8F001069BE /* ImageCropScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 157190341B0A5F8F001069BE /* ImageCropScene.m */; };
+		1578E4D51B041115006EDD04 /* ImagePickerScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 1578E4D41B041115006EDD04 /* ImagePickerScene.m */; };
 		1591BB4C1AF29BCE00610983 /* TimedScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 1591BB4B1AF29BCE00610983 /* TimedScene.m */; };
 		1591BB4F1AF2A45600610983 /* HighscoreDisplayScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 1591BB4E1AF2A45600610983 /* HighscoreDisplayScene.m */; };
 		1591BB551AF2DDA900610983 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1591BB541AF2DDA900610983 /* AudioToolbox.framework */; };
@@ -73,6 +75,10 @@
 		15302E941AF9868900073209 /* MovingNetScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MovingNetScene.m; path = ../MovingNetScene.m; sourceTree = "<group>"; };
 		1559A7E11B02AFFE00595AE2 /* FreeplaySettingsScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreeplaySettingsScene.h; sourceTree = "<group>"; };
 		1559A7E21B02AFFE00595AE2 /* FreeplaySettingsScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreeplaySettingsScene.m; sourceTree = "<group>"; };
+		157190331B0A5F8F001069BE /* ImageCropScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCropScene.h; sourceTree = "<group>"; };
+		157190341B0A5F8F001069BE /* ImageCropScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCropScene.m; sourceTree = "<group>"; };
+		1578E4D31B041115006EDD04 /* ImagePickerScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePickerScene.h; sourceTree = "<group>"; };
+		1578E4D41B041115006EDD04 /* ImagePickerScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePickerScene.m; sourceTree = "<group>"; tabWidth = 2; wrapsLines = 1; };
 		1591BB4A1AF29BCE00610983 /* TimedScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimedScene.h; sourceTree = "<group>"; };
 		1591BB4B1AF29BCE00610983 /* TimedScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimedScene.m; sourceTree = "<group>"; };
 		1591BB4D1AF2A45600610983 /* HighscoreDisplayScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighscoreDisplayScene.h; sourceTree = "<group>"; };
@@ -158,6 +164,10 @@
 				1527193A1AF02602006B0A5C /* GameViewController.m */,
 				1527195C1AF02A1B006B0A5C /* SplashScreen.h */,
 				1527195D1AF02A1B006B0A5C /* SplashScreen.m */,
+				1578E4D31B041115006EDD04 /* ImagePickerScene.h */,
+				1578E4D41B041115006EDD04 /* ImagePickerScene.m */,
+				157190331B0A5F8F001069BE /* ImageCropScene.h */,
+				157190341B0A5F8F001069BE /* ImageCropScene.m */,
 				15302E931AF9868900073209 /* MovingNetScene.h */,
 				15302E941AF9868900073209 /* MovingNetScene.m */,
 				1591BB4A1AF29BCE00610983 /* TimedScene.h */,
@@ -321,8 +331,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1578E4D51B041115006EDD04 /* ImagePickerScene.m in Sources */,
 				1527193B1AF02602006B0A5C /* GameViewController.m in Sources */,
 				152719331AF02602006B0A5C /* AppDelegate.m in Sources */,
+				157190351B0A5F8F001069BE /* ImageCropScene.m in Sources */,
 				1559A7E31B02AFFE00595AE2 /* FreeplaySettingsScene.m in Sources */,
 				152719361AF02602006B0A5C /* GameScene.m in Sources */,
 				152719301AF02602006B0A5C /* main.m in Sources */,

@@ -8,7 +8,7 @@
 
 #import "GameViewController.h"
 #import "SplashScreen.h"
-#import "GameScene.h"
+#import "ImagePickerScene.h"
 
 @implementation SKScene (Unarchive)
 
