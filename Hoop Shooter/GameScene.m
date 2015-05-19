@@ -33,6 +33,7 @@ static const uint32_t addPoints = 32;
     _isGamePaused = NO;
     _bounceSound = [SKAction playSoundFileNamed:@"Bounce.mp3" waitForCompletion:NO];
     _swishSound = [SKAction playSoundFileNamed:@"Swish.mp3" waitForCompletion:NO];
+    userDefualts = [NSUserDefaults standardUserDefaults];
     [self setDefaultValues];
     
     self.backgroundColor = [SKColor colorWithRed:.7 green:.7 blue:1 alpha:1];
@@ -169,7 +170,7 @@ static const uint32_t addPoints = 32;
             FreeplaySettingsScene *settings = [FreeplaySettingsScene sceneWithSize:self.size];
             [self.view presentScene:settings transition:[SKTransition pushWithDirection:SKTransitionDirectionLeft duration:1]];
         }
-        if([node.name isEqualToString:@"Resume Game"]){
+        if([node.name isEqualToString:@"Resume"]){
             [self unpauseGame];
         }
     }
@@ -212,7 +213,7 @@ static const uint32_t addPoints = 32;
     [self addChild:_resume];
     
     _resumeBox = [SKShapeNode shapeNodeWithRectOfSize:CGSizeMake(w*3/4, _resume.fontSize + 30) cornerRadius:0];
-    _resumeBox.name = @"Resume Game";
+    _resumeBox.name = @"Resume";
     _resumeBox.position = _resume.position;
     _resumeBox.fillColor = [SKColor clearColor];
     _resumeBox.lineWidth = 5;
@@ -273,7 +274,6 @@ static const uint32_t addPoints = 32;
 }
 
 -(void)setDefaultValues {
-    userDefualts = [NSUserDefaults standardUserDefaults];
     _gravity = [userDefualts floatForKey:@"Gravity"];
     _restitution = [userDefualts floatForKey:@"Restitution"];
     _velocityCoefficient = [userDefualts floatForKey:@"Velocity Coefficient"];

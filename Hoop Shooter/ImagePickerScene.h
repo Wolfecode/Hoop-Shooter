@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface ImagePickerScene : SKScene <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface ImagePickerScene : SKScene <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate>
 
 
 @end

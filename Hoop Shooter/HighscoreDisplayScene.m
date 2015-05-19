@@ -21,18 +21,19 @@
     h = self.view.frame.size.height;
     xScale = w/375;
     yScale = h/667;
-    self.backgroundColor = [SKColor lightGrayColor];
+    self.backgroundColor = [SKColor blackColor];
     
     SKLabelNode *mainLabel = [SKLabelNode labelNodeWithText:@"HIGHSCORES"];
     mainLabel.fontName = @"Myriad Pro";
     mainLabel.fontSize = 32*xScale;
-    mainLabel.fontColor = [SKColor blackColor];
+    mainLabel.fontColor = [SKColor whiteColor];
     mainLabel.position = CGPointMake(w/2, h - 50*yScale);
     [self addChild:mainLabel];
     
     float textWidth = mainLabel.frame.size.width;
     NSArray *objects = [self getParseList];
     int i = 0;
+    NSLog(@"%@",objects);
     for (PFObject *object in objects){
         SKLabelNode *nameLabel = [SKLabelNode labelNodeWithText:[object[@"userName"] capitalizedString]];
         nameLabel.fontName = @"Myriad Pro";
@@ -41,6 +42,8 @@
         nameLabel.fontColor = [SKColor orangeColor];
         nameLabel.position = CGPointMake(w/2 - textWidth/2, h - (i+2)*50*yScale);
         [self addChild:nameLabel];
+        NSLog(@"%i", i);
+
         
         SKLabelNode *highScoreLabel = [SKLabelNode labelNodeWithText:[NSString stringWithFormat:@"%@",object[@"userScore"]]];
         highScoreLabel.fontName = @"Myriad Pro";
@@ -50,6 +53,7 @@
         highScoreLabel.position = CGPointMake(w/2 + textWidth/2, h - (i+2)*50*yScale);
         [self addChild:highScoreLabel];
         i++;
+        NSLog(@"This is: %i", i);
     }
     
     SKLabelNode *home = [SKLabelNode labelNodeWithText:@"HOME"];
@@ -61,7 +65,7 @@
     home.zPosition = 10;
     [self addChild:home];
     
-    SKShapeNode *homeBox = [SKShapeNode shapeNodeWithRectOfSize:CGSizeMake(w*3/4, home.fontSize + 30) cornerRadius:0];
+    SKShapeNode *homeBox = [SKShapeNode shapeNodeWithRectOfSize:CGSizeMake(textWidth, home.fontSize + 20) cornerRadius:0];
     homeBox.name = @"Home Button";
     homeBox.position = home.position;
     homeBox.fillColor = [SKColor clearColor];
@@ -73,11 +77,14 @@
 
 -(NSArray *)getParseList {
     PFQuery *query = [PFQuery queryWithClassName:@"UserName"];
-    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+    if(!query){
+//    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+    }
     [query orderByDescending:@"userScore"];
     query.limit = 10;
     
     NSArray *objects = [query findObjects];
+    NSLog(@"%@",objects);
     return objects;
 }
 

@@ -13,17 +13,15 @@
 @implementation TimedScene {
     float w;
     float h;
-    NSUserDefaults *userDefault;
 }
 
 -(void)didMoveToView:(SKView *)view {
     [super didMoveToView:view];
     w = self.view.frame.size.width;
     h = self.view.frame.size.height;
-    userDefault = [NSUserDefaults standardUserDefaults];
     
     _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(countDown) userInfo:nil repeats:YES];
-    _timerDuration = 1;
+    _timerDuration = 15;
     _timerLabel = [SKLabelNode labelNodeWithText:[NSString stringWithFormat:@"%i",_timerDuration]];
     _timerLabel.fontSize = 48;
     _timerLabel.fontColor = [SKColor whiteColor];
@@ -66,8 +64,12 @@
 
 -(void)pauseGame {
     [super pauseGame];
-    self.home.position = CGPointMake(w/2, h/2 + 100);
-    self.homeBox.position = self.home.position;
+    
+    [self.settings removeFromParent];
+    [self.settingsBox removeFromParent];
+    
+    self.resume.position = CGPointMake(w/2, h/2 + 100);
+    self.resumeBox.position = self.resume.position;
     
     _highscores = [SKLabelNode labelNodeWithText:@"HIGHSCORES"];
     _highscores.fontName = @"Myriad Pro";
@@ -87,8 +89,8 @@
     _highscoresBox.zPosition = 10;
     [self addChild:_highscoresBox];
     
-    self.resume.position = CGPointMake(w/2, h/2 - 100);
-    self.resumeBox.position = self.resume.position;
+    self.home.position = CGPointMake(w/2, h/2 - 100);
+    self.homeBox.position = self.home.position;
 }
 
 -(void)unpauseGame {
@@ -111,7 +113,6 @@
 }
 
 -(void)saveToParse:(NSString *)name {
-    
     PFObject *score = [PFObject objectWithClassName:@"UserName"];
     [score setObject:name forKey:@"userName"];
     [score setObject:@"userId" forKey:@"userId"];
@@ -123,7 +124,7 @@
             [self.view presentScene:highscoreDisplayScene transition:[SKTransition pushWithDirection:SKTransitionDirectionLeft duration:1]];
         }
         else {
-            [score saveEventually];
+//            [score saveEventually];
             UIAlertView *internetError = [[UIAlertView alloc] initWithTitle:@"No Internet Connection" message:@"Sorry, there seems to be a problem connecting to the internet. Please try again soon." delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"Try Again", nil];
             [internetError show];
             NSLog(@"%@",error);

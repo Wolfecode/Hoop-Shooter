@@ -56,6 +56,8 @@
        if (![imageData writeToFile:imagePath atomically:NO])
        {
            NSLog(@"Failed to cache image data to disk");
+           UIAlertView *failedAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was a problem. Photo failed to save." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Cancel", nil];
+           [failedAlert show];
        }
        else
        {
@@ -70,6 +72,10 @@
    }];
 }
 
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    SplashScreen *splashScreen = [SplashScreen sceneWithSize:self.size];
+    [self.view presentScene:splashScreen];
+}
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [picker dismissViewControllerAnimated:YES completion:nil];
     SplashScreen *splashScreen = [SplashScreen sceneWithSize:self.size];
