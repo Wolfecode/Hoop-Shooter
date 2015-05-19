@@ -24,7 +24,7 @@
     xScale = w/375;
     yScale = h/667;
     
-    self.backgroundColor = [SKColor blueColor];
+    self.backgroundColor = [SKColor darkGrayColor];
     
     userDefaults = [NSUserDefaults standardUserDefaults];
     UIImage *image = [self imageWithImage:[UIImage imageNamed:@"Basketball"] scaledToSize:CGSizeMake(20, 20)];
@@ -111,9 +111,15 @@
     
     _roofSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(w*10/12, 4*87*yScale, 100*xScale, 50)];
     [_roofSwitch addTarget:self action:@selector(roofSwitchAction:) forControlEvents:UIControlEventValueChanged];
-    _roofSwitch.on = NO;
+    _roofSwitch.on = [userDefaults boolForKey:@"Roof?"];
     _roofSwitch.onTintColor = [UIColor orangeColor];
     [self.view addSubview:_roofSwitch];
+    
+    _hoverSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(w*10/12, 5*87*yScale, 100, 50)];
+    [_hoverSwitch addTarget:self action:@selector(hoverSwitchAction:) forControlEvents:UIControlEventValueChanged];
+    _hoverSwitch.on = [userDefaults boolForKey:@"Hover?"];
+    _hoverSwitch.onTintColor = [UIColor orangeColor];
+    [self.view addSubview:_hoverSwitch];
     
     if([userDefaults boolForKey:@"Hover?"]){
         _hoverSwitchLabel = [SKLabelNode labelNodeWithText:@"Ball will hover: YES"];
@@ -129,11 +135,7 @@
     _hoverSwitchLabel.position = CGPointMake(w/24, h - 450*yScale);
     [self addChild:_hoverSwitchLabel];
     
-    _hoverSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(w*10/12, 5*87*yScale, 100, 50)];
-    [_hoverSwitch addTarget:self action:@selector(hoverSwitchAction:) forControlEvents:UIControlEventValueChanged];
-    _hoverSwitch.on = YES;
-    _hoverSwitch.onTintColor = [UIColor orangeColor];
-    [self.view addSubview:_hoverSwitch];
+    
    
     SKLabelNode *home = [SKLabelNode labelNodeWithText:@"HOME"];
     home.fontName = @"Myriad Pro";
@@ -251,10 +253,6 @@
     [_velocityCoefficientSlider removeFromSuperview];
     [_hoverSwitch removeFromSuperview];
     [_roofSwitch removeFromSuperview];
-}
-
--(void)update:(NSTimeInterval)currentTime {
-    
 }
 
 @end
